@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Pleiades</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-glow background-glow-left"></div>
+    <div class="background-glow background-glow-right"></div>
+
+    <main class="app-shell">
+      <section class="hero-panel">
+        <p class="eyebrow">Electron Skeleton</p>
+        <h1>Build your macOS desktop app here.</h1>
+        <p class="lede">
+          This starter gives you a clean Electron main process, a secure preload
+          bridge, and a renderer you can extend however you want.
+        </p>
+
+        <div class="meta-grid">
+          <article class="meta-card">
+            <span class="label">Platform</span>
+            <strong id="platform">Loading…</strong>
+          </article>
+          <article class="meta-card">
+            <span class="label">Electron</span>
+            <strong id="electron-version">Loading…</strong>
+          </article>
+          <article class="meta-card">
+            <span class="label">Chrome</span>
+            <strong id="chrome-version">Loading…</strong>
+          </article>
+          <article class="meta-card">
+            <span class="label">Node</span>
+            <strong id="node-version">Loading…</strong>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./renderer.js"></script>
+  </body>
+</html>
