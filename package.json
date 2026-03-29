@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Electron app scaffold using the Electron Forge webpack-typescript template",
   "main": ".webpack/main",
+  "gypfile": true,
   "private": true,
   "scripts": {
     "start": "electron-forge start",

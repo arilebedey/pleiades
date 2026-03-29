@@ -1,14 +1,16 @@
 :root {
   color-scheme: dark;
-  --bg: #07111f;
-  --panel: rgba(10, 20, 40, 0.8);
-  --panel-border: rgba(132, 157, 255, 0.2);
+  --sidebar-width: 280px;
+  --window-bg: rgba(7, 13, 24, 0.64);
+  --window-border: rgba(255, 255, 255, 0.08);
+  --content-bg: rgba(9, 16, 30, 0.28);
+  --panel: rgba(7, 14, 26, 0.58);
+  --panel-border: rgba(132, 157, 255, 0.18);
   --text: #e8eefc;
   --muted: #9eb1d6;
-  --accent: #6ce2ff;
-  --accent-strong: #7fffb7;
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-  --font-display: 'Avenir Next', 'Helvetica Neue', sans-serif;
+  --accent: #7dd8ff;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+  --font-display: 'SF Pro Display', 'Avenir Next', 'Helvetica Neue', sans-serif;
 }
 
 * {
@@ -23,21 +25,84 @@ body {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow: hidden;
   font-family: var(--font-display);
   color: var(--text);
   background:
-    radial-gradient(circle at top, rgba(108, 226, 255, 0.22), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(127, 255, 183, 0.12), transparent 28%),
-    linear-gradient(160deg, #040916 0%, #091224 42%, #050814 100%);
-  overflow: hidden;
+    radial-gradient(circle at top left, rgba(101, 180, 255, 0.22), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(115, 255, 212, 0.14), transparent 30%),
+    linear-gradient(165deg, rgba(4, 9, 18, 0.96) 0%, rgba(7, 12, 22, 0.9) 46%, rgba(4, 8, 16, 0.96) 100%);
 }
 
-.app-shell {
+body[data-platform='darwin'] {
+  background: transparent;
+}
+
+.window-chrome {
   position: relative;
   display: grid;
-  place-items: center;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   min-height: 100vh;
-  padding: 32px;
+  background: var(--window-bg);
+}
+
+body[data-platform='darwin'] .window-chrome {
+  background: transparent;
+}
+
+.window-chrome::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px var(--window-border);
+}
+
+.drag-region {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  -webkit-app-region: drag;
+  z-index: 5;
+}
+
+.native-sidebar {
+  position: relative;
+  min-width: 0;
+  background: transparent;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.native-sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 18px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.12));
+  opacity: 0.55;
+}
+
+.content-pane {
+  position: relative;
+  min-width: 0;
+  min-height: 100vh;
+  padding: 92px 40px 40px;
+  background: var(--content-bg);
+}
+
+body[data-platform='darwin'] .content-pane {
+  background: transparent;
+}
+
+body[data-platform='darwin'] .background-glow {
+  display: none;
 }
 
 .hero-panel {
@@ -49,7 +114,8 @@ body {
   border-radius: 28px;
   background: var(--panel);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .eyebrow {
@@ -88,7 +154,7 @@ h1 {
   padding: 18px 20px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .label {
@@ -111,24 +177,25 @@ h1 {
   height: 360px;
   border-radius: 50%;
   filter: blur(28px);
-  opacity: 0.35;
+  opacity: 0.42;
+  pointer-events: none;
 }
 
 .background-glow-left {
-  top: -80px;
-  left: -100px;
-  background: rgba(108, 226, 255, 0.2);
+  top: -90px;
+  left: -80px;
+  background: rgba(108, 226, 255, 0.22);
 }
 
 .background-glow-right {
-  right: -60px;
+  right: -40px;
   bottom: -110px;
-  background: rgba(127, 255, 183, 0.14);
+  background: rgba(127, 255, 183, 0.18);
 }
 
-@media (max-width: 720px) {
-  .app-shell {
-    padding: 20px;
+@media (max-width: 920px) {
+  .content-pane {
+    padding: 88px 24px 24px;
   }
 
   .hero-panel {
@@ -138,5 +205,16 @@ h1 {
 
   .lede {
     font-size: 0.98rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .content-pane {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 10vw, 4rem);
   }
 }
