@@ -1,32 +1,47 @@
 {
   "name": "pleiades",
-  "version": "0.1.0",
+  "productName": "Pleiades",
+  "version": "1.0.0",
+  "description": "Electron app scaffold using the Electron Forge webpack-typescript template",
+  "main": ".webpack/main",
   "private": true,
-  "description": "Electron app skeleton for local macOS development.",
-  "main": "src/main/main.js",
   "scripts": {
-    "start": "electron .",
-    "dev": "electron .",
-    "package": "electron-builder --dir",
-    "dist": "electron-builder"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
   },
-  "build": {
-    "appId": "com.ari.pleiades",
-    "productName": "Pleiades",
-    "files": [
-      "src/**/*",
-      "package.json"
-    ],
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "category": "public.app-category.developer-tools"
-    }
+  "keywords": [],
+  "author": {
+    "name": "arilebedey",
+    "email": "34816154+arilebedey@users.noreply.github.com"
   },
+  "license": "MIT",
   "devDependencies": {
-    "electron": "^37.2.0",
-    "electron-builder": "^26.0.12"
+    "@electron-forge/cli": "^7.11.1",
+    "@electron-forge/maker-deb": "^7.11.1",
+    "@electron-forge/maker-rpm": "^7.11.1",
+    "@electron-forge/maker-squirrel": "^7.11.1",
+    "@electron-forge/maker-zip": "^7.11.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.11.1",
+    "@electron-forge/plugin-fuses": "^7.11.1",
+    "@electron-forge/plugin-webpack": "^7.11.1",
+    "@electron/fuses": "^1.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "css-loader": "^6.11.0",
+    "electron": "41.1.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.32.0",
+    "fork-ts-checker-webpack-plugin": "^7.3.0",
+    "node-loader": "^2.1.0",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.4",
+    "typescript": "~4.5.4"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
   }
 }
